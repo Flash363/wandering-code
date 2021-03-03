@@ -1,0 +1,9 @@
+<component name="libraryTable">
+    <library name="MiniPOS">
+        <CLASSES>
+            <root url="jar://$PROJECT_DIR$/dist/MiniPOS.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+    </library>
+</component>

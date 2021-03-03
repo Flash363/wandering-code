@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BarcodeGenerator" pageWidth="379" pageHeight="409" columnWidth="339" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="1241f18b-f6ad-4608-980a-74b5cc8b6794">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="barcode" class="java.lang.String"/>
+    <queryString language="SQL">
+		<![CDATA[]]>
+    </queryString>
+    <field name="ProdName" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="79" splitType="Stretch"/>
+    </title>
+    <columnHeader>
+        <band height="61" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="72" splitType="Stretch">
+            <componentElement>
+                <reportElement x="0" y="0" width="200" height="50" uuid="385c442c-d4bb-413f-9ce4-8e096d4f5904"/>
+                <jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+                    <jr:codeExpression><![CDATA[$P{barcode}]]></jr:codeExpression>
+                </jr:Code128>
+            </componentElement>
+            <textField>
+                <reportElement x="0" y="51" width="200" height="20" uuid="f4d286cf-0057-4806-8398-d35a4fb3d51f"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="15"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{barcode}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch"/>
+    </columnFooter>
+</jasperReport>

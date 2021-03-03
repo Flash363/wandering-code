@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptSalesPerCustomer" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8f66c482-ef9b-4590-80d9-cf6b614c3ecf">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+    <style name="Detail" fontName="Arial" fontSize="12"/>
+    <parameter name="stDate" class="java.util.Date">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="endDate" class="java.util.Date">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[SELECT Sales.SaleID,Sales.SaleDate AS Tanggal,Sales.Time AS Pukul,CONCAT (Employees.FirstName," ",Employees.MidName,"",Employees.LastName) AS Kasir,Customers.CustName AS Pelanggan,Sales.MTotal AS Subtotal,Sales.MCash AS UangTunai,Sales.MReturn AS UangKembali
+FROM Sales
+INNER JOIN Employees
+ON Sales.EmpID = Employees.EmpID
+INNER JOIN SalesDetail
+ON Sales.SaleID = SalesDetail.SaleID
+INNER JOIN Customers
+ON Sales.CustID = Customers.CustID
+WHERE Sales.SaleDate BETWEEN $P{stDate} AND $P{endDate}
+GROUP BY Sales.SaleID ASC
+ORDER BY Customers.CustName ASC]]>
+    </queryString>
+    <field name="SaleID" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="Tanggal" class="java.sql.Date"/>
+    <field name="Pukul" class="java.sql.Time"/>
+    <field name="Kasir" class="java.lang.String"/>
+    <field name="Pelanggan" class="java.lang.String"/>
+    <field name="Subtotal" class="java.lang.Integer"/>
+    <field name="UangTunai" class="java.lang.Integer"/>
+    <field name="UangKembali" class="java.lang.Integer"/>
+    <group name="Pelanggan">
+        <groupExpression><![CDATA[$F{Pelanggan}]]></groupExpression>
+        <groupHeader>
+            <band height="58">
+                <textField>
+                    <reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#990099" uuid="06168a99-66cd-4488-9169-afe1e39c69b0"/>
+                    <textElement>
+                        <font fontName="Liberation Sans" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Pelanggan}]]></textFieldExpression>
+                </textField>
+                <rectangle>
+                    <reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="a546f4f1-7bbf-4818-b281-13d9593dcb5f"/>
+                </rectangle>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="0" y="41" width="75" height="15" forecolor="#666666" backcolor="#00FFFF" uuid="6b67c074-d04d-40fa-8a39-1c3522ab54fe"/>
+                    <textElement>
+                        <font fontName="Liberation Sans"/>
+                    </textElement>
+                    <text><![CDATA[Tanggal]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="75" y="41" width="204" height="15" forecolor="#666666" backcolor="#00FFFF" uuid="567baae9-4be6-4309-bd90-dd05bee3f5ac"/>
+                    <textElement>
+                        <font fontName="Liberation Sans"/>
+                    </textElement>
+                    <text><![CDATA[Kasir]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="279" y="41" width="92" height="15" forecolor="#666666" backcolor="#00FFFF" uuid="479967b9-188e-4224-b6e9-f6abeebc87f8"/>
+                    <textElement>
+                        <font fontName="Liberation Sans"/>
+                    </textElement>
+                    <text><![CDATA[Subtotal]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="371" y="41" width="92" height="15" forecolor="#666666" backcolor="#00FFFF" uuid="86b00021-0f7a-4c44-a63b-5d516940865c"/>
+                    <textElement>
+                        <font fontName="Liberation Sans"/>
+                    </textElement>
+                    <text><![CDATA[UangTunai]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="463" y="41" width="92" height="15" forecolor="#666666" backcolor="#00FFFF" uuid="a59b6b87-b049-4ddf-aef6-cf1af57a3d37"/>
+                    <textElement>
+                        <font fontName="Liberation Sans"/>
+                    </textElement>
+                    <text><![CDATA[UangKembali]]></text>
+                </staticText>
+                <line>
+                    <reportElement positionType="FixRelativeToBottom" x="0" y="56" width="555" height="1" uuid="6835f528-b011-4ba3-b62f-116b5834957f"/>
+                    <graphicElement>
+                        <pen lineWidth="0.5" lineColor="#999999"/>
+                    </graphicElement>
+                </line>
+                <line>
+                    <reportElement positionType="FixRelativeToBottom" x="0" y="39" width="555" height="1" uuid="7a69d03a-256a-47a0-83e6-2d436e67aeff"/>
+                    <graphicElement>
+                        <pen lineWidth="0.5" lineColor="#999999"/>
+                    </graphicElement>
+                </line>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="6"/>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="110" splitType="Stretch">
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="-2" y="0" width="81" height="46" uuid="f03b457e-0dd7-48c0-ab51-d752ad47dde9"/>
+                <imageExpression><![CDATA["src/com/resources/icon/pos_200x200.png"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement style="Title" x="-2" y="0" width="555" height="44" forecolor="#0066CC" uuid="41dfd9ad-f2c6-46e7-936b-9f53619b1d0e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="18"/>
+                </textElement>
+                <text><![CDATA[Laporan Penjualan Per-Pelanggan]]></text>
+            </staticText>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="472" y="0" width="81" height="46" uuid="c8e4c1f9-bdb9-49ee-9f4d-56d27b00a709"/>
+                <imageExpression><![CDATA["src/com/resources/icon/pos_200x200.png"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="1" y="66" width="552" height="15" forecolor="#000000" uuid="e17784c4-c2e6-4169-9b2a-cd522b2b50bb"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="12" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Periode]]></text>
+            </staticText>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="0" y="81" width="270" height="15" forecolor="#666666" uuid="6d0a58a0-afc0-4296-9532-f504aa92a4a8"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="13"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{stDate}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="283" y="81" width="270" height="15" forecolor="#666666" uuid="abfb8fff-1fcd-458a-80c9-a80f32c7ac25"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="13"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{endDate}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="261" y="81" width="33" height="15" forecolor="#666666" uuid="baa7db42-baa5-4bff-a01b-be94483f565e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="13" isBold="true"/>
+                </textElement>
+                <text><![CDATA[-]]></text>
+            </staticText>
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="1" y="102" width="555" height="1" uuid="b8b98d77-7376-4e6a-b12c-b17b4c54a83a"/>
+                <graphicElement>
+                    <pen lineWidth="1.5" lineStyle="Double" lineColor="#000000"/>
+                </graphicElement>
+            </line>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="4" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="16" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="969024aa-2d88-40bf-a6c3-9115b251a394"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <textField pattern="dd-MM-yyyy">
+                <reportElement style="Detail" x="0" y="0" width="75" height="15" uuid="b1d5eec1-842f-4ec9-991b-0f06f8ccd604"/>
+                <textElement>
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{Tanggal}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="75" y="0" width="201" height="15" uuid="0475ce7b-6bf0-4da7-84ab-b6b87a886326"/>
+                <textElement>
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{Kasir}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="279" y="0" width="89" height="15" uuid="ec3c285a-d59a-44a6-93ce-8fef79dc9b35"/>
+                <textElement>
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{Subtotal}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="371" y="0" width="89" height="15" uuid="b0676f29-943c-4114-9e09-151d6e699b98"/>
+                <textElement>
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{UangTunai}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="463" y="0" width="92" height="15" uuid="99ff0131-9378-4fed-af40-e2e3f49b11cc"/>
+                <textElement>
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{UangKembali}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="32be5dcd-1359-4006-8ca1-b2a7469d010b"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="b44e187c-625e-48fb-aeea-898be0323b01"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Liberation Sans" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="d4f7f70c-8827-45cd-9da7-f95e993ba35f"/>
+                <textElement>
+                    <font fontName="Liberation Sans" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="122173c3-5dfb-4ce9-a629-7ae9efb7c859"/>
+                <textElement>
+                    <font fontName="Liberation Sans" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

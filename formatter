@@ -1,0 +1,17 @@
+#,##0.00
+089603641394
+
+Query SQL vSaleDetail
+CREATE VIEW vSaleDetail AS
+SELECT s.SaleID,s.SaleDate,s.Time,e.EmpID,e.FirstName AS Cashier,pd.ProdName AS Product,pd.SellPrice,sd.Qty,sd.Total,s.Freight AS TotalFreight,s.MTotal,s.MCash,s.MReturn
+FROM Sales s
+INNER JOIN Employees e
+ON s.EmpID = e.EmpID
+INNER JOIN SalesDetail sd
+ON s.SaleID = sd.SaleID
+INNER JOIN Products pd
+ON sd.ProductID = pd.ProductID
+ORDER BY s.SaleID
+
+Query SQL vProduct
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vProduct` AS select `pro`.`ProductID` AS `IdBarang`,`pro`.`BarcodeID` AS `Barcode`,`pro`.`ProdName` AS `NamaBarang`,`pro`.`SellPrice` AS `HargaJual`,`pro`.`CostPrice` AS `HargaBeli`,`pro`.`Netto` AS `Netto`,`pro`.`Stock` AS `StokBarang`,`pnr`.`UnitName` AS `Satuan`,`spl`.`CompanyName` AS `Supplier`,`pro`.`ExpireDate` AS `TglKadaluarsa` from ((`Products` `pro` join `ProdUnit` `pnr` on(`pro`.`UnitID` = `pnr`.`UnitID`)) join `Suppliers` `spl` on(`pro`.`SupplierID` = `spl`.`SupID`)) order by `pro`.`ProductID`

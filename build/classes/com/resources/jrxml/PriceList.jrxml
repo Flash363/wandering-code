@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PriceList" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d7c2972e-d6b4-4e7d-81ac-aaa4a8293b6d">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+    <style name="Detail" fontName="Arial" fontSize="12"/>
+    <queryString>
+		<![CDATA[SELECT DISTINCT ProdName,SellPrice FROM Products]]>
+    </queryString>
+    <field name="ProdName" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="SellPrice" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="56" splitType="Stretch">
+            <staticText>
+                <reportElement style="Title" x="0" y="0" width="555" height="54" forecolor="#0066CC" uuid="9c879857-92e2-4dcd-8268-b418856d2c03"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18"/>
+                </textElement>
+                <text><![CDATA[Daftar Harga]]></text>
+            </staticText>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="0" y="0" width="81" height="54" uuid="a7c85aee-ad46-4edd-8091-f7947f70f22d"/>
+                <imageExpression><![CDATA["/home/flash/Project/MiniPOS/src/com/minipos/resource/icon/pos_200x200.png"]]></imageExpression>
+            </image>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="473" y="0" width="81" height="54" uuid="6878cc6a-f0e1-469d-b40b-4987b4044229"/>
+                <imageExpression><![CDATA["/home/flash/Project/MiniPOS/src/com/minipos/resource/icon/pos_200x200.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="36" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="cc9bf2cb-33b6-43e4-843a-b0b32827e297"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement style="Column header" x="0" y="19" width="317" height="15" uuid="b6e057b8-72e2-4c27-9e73-2d49efe10537"/>
+                <text><![CDATA[Nama Produk/Barang]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="317" y="19" width="237" height="15" uuid="4f51b39a-9e01-46e2-93dd-d117c0bd2bb6"/>
+                <text><![CDATA[Harga Jual]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="4eb18747-c2a2-44d4-bb6c-825936c1e628"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement style="Detail" x="0" y="0" width="317" height="15" uuid="401ded6d-a2d5-44cf-a637-a71c72ff1954"/>
+                <textFieldExpression><![CDATA[$F{ProdName}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="317" y="0" width="237" height="15" uuid="5df1fc3a-1164-4461-8d33-239fb7f19a75"/>
+                <textFieldExpression><![CDATA[$F{SellPrice}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="305feed1-34ca-4e71-a25e-0be7c63009c6"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="5e642b0e-1fc5-4f24-99af-7bc3c119c11f"/>
+                <textElement textAlignment="Right">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="49c654cb-5c2a-4f92-80ba-58885f5fbf4b"/>
+                <textElement>
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="8b25e04c-413f-475a-9029-906317f7a876"/>
+                <textElement>
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

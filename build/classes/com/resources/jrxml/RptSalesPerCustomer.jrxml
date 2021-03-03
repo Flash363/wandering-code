@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptSalesPerCashier" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8936610f-15ba-4922-aa7b-b65407c4e48b">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+    <style name="Detail" fontName="Arial" fontSize="12"/>
+    <parameter name="stDate" class="java.util.Date">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="endDate" class="java.util.Date">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[SELECT `SaleID`,`SaleDate`,`Cashier`,`Customers`,`MTotal`,`MCash`,`MReturn` FROM `vSalesDetail` WHERE vSalesDetail.SaleDate BETWEEN $P{stDate} AND $P{endDate} ORDER BY vSalesDetail.Customers]]>
+    </queryString>
+    <field name="SaleID" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="SaleDate" class="java.sql.Date">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="Cashier" class="java.lang.String"/>
+    <field name="Customers" class="java.lang.String"/>
+    <field name="MTotal" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="MCash" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="MReturn" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <variable name="Total" class="java.lang.Integer" resetType="Group" resetGroup="Cashier" calculation="Sum">
+        <variableExpression><![CDATA[$F{MTotal}]]></variableExpression>
+    </variable>
+    <group name="Cashier">
+        <groupExpression><![CDATA[$F{Cashier}]]></groupExpression>
+        <groupHeader>
+            <band height="62">
+                <rectangle>
+                    <reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="83fd7d26-da62-496c-895c-0a6d10ff8117"/>
+                </rectangle>
+                <line>
+                    <reportElement positionType="FixRelativeToBottom" x="0" y="60" width="555" height="1" uuid="7697b6e9-7a31-4a9e-b5b4-7377d9cddc47"/>
+                    <graphicElement>
+                        <pen lineWidth="0.5" lineColor="#999999"/>
+                    </graphicElement>
+                </line>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="0" y="40" width="70" height="20" forecolor="#000000" backcolor="#999999" uuid="2b36f894-1e6f-4d7a-b15a-96118e79680c"/>
+                    <textElement verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Tanggal]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="70" y="40" width="56" height="20" forecolor="#000000" backcolor="#999999" uuid="0e671b8a-fd16-4019-9175-05b0d5f257ef"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[No. Sales]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="126" y="40" width="150" height="20" forecolor="#000000" backcolor="#999999" uuid="97459d0f-39a9-45e4-9ae3-2eb45b738f65"/>
+                    <textElement verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Kasir]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="276" y="40" width="92" height="20" forecolor="#000000" backcolor="#999999" uuid="81e36512-8e59-4ac3-90de-2747ea8a910a"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Subtotal]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="368" y="40" width="92" height="20" forecolor="#000000" backcolor="#999999" uuid="2222ce90-4393-4d3b-afe1-aff2ebcd4ab2"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Tunai]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Column header" mode="Opaque" x="460" y="40" width="95" height="20" forecolor="#000000" backcolor="#999999" uuid="eee15e63-55fa-4e70-aa10-6df31e008a7d"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Kembali]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="53" y="14" width="422" height="24" forecolor="#990099" uuid="cda40d76-2512-4000-808e-6360df0c9a9c"/>
+                    <textElement>
+                        <font fontName="Ubuntu" size="18"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Customers}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="17">
+                <staticText>
+                    <reportElement mode="Opaque" x="0" y="1" width="259" height="15" backcolor="#999999" uuid="8a03825d-5e22-49b7-aa14-be8b5ede2c52"/>
+                    <textElement verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" size="12"/>
+                    </textElement>
+                    <text><![CDATA[Subtotal]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement mode="Opaque" x="53" y="1" width="210" height="15" backcolor="#999999" uuid="e04664ef-cfcb-4ef4-805e-d09f0323dc01"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" size="12"/>
+                    </textElement>
+                    <text><![CDATA[:]]></text>
+                </staticText>
+                <textField pattern="#,##0.00">
+                    <reportElement mode="Opaque" x="263" y="1" width="105" height="15" backcolor="#999999" uuid="c2cd4b3f-3db9-4309-be2b-db9bab641ddc"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" size="12"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement mode="Opaque" x="197" y="1" width="79" height="15" backcolor="#999999" uuid="8c189cda-73f6-4ac3-bed1-e37f41731287"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font fontName="Liberation Sans" size="12"/>
+                    </textElement>
+                    <text><![CDATA[Rp.]]></text>
+                </staticText>
+            </band>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="46" splitType="Stretch">
+            <staticText>
+                <reportElement style="Title" x="0" y="0" width="555" height="44" forecolor="#0066CC" uuid="6cefa61d-4e70-4e33-90c2-36994b761b71"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="18"/>
+                </textElement>
+                <text><![CDATA[Laporan Penjualan Per-Pelanggan]]></text>
+            </staticText>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="0" y="0" width="81" height="46" uuid="bebf97a1-039d-47a7-9f26-671cf3b67278"/>
+                <imageExpression><![CDATA["src/com/resources/icon/pos_200x200.png"]]></imageExpression>
+            </image>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="475" y="0" width="81" height="46" uuid="160b2b3e-79b1-448e-ade4-5517d1b11aa4"/>
+                <imageExpression><![CDATA["src/com/resources/icon/pos_200x200.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="38" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="9b0e77dd-feda-43db-ad1f-76e95427869d"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="2" y="15" width="257" height="15" forecolor="#666666" uuid="7adc3c7c-0837-45d1-b1a5-a93510fa0ec6"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="13"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{stDate}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="3" y="0" width="552" height="15" forecolor="#000000" uuid="be84a57c-072b-4adc-a3e6-9c2016df062b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="12" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Periode]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="262" y="15" width="33" height="15" forecolor="#666666" uuid="faf1b251-8f6a-4f3d-a95c-e17dead7b6f9"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="13" isBold="true"/>
+                </textElement>
+                <text><![CDATA[-]]></text>
+            </staticText>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="295" y="15" width="260" height="15" forecolor="#666666" uuid="62a2672c-add9-41f6-a05a-46121e15862b"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Liberation Sans" size="13"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{endDate}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="a438acd9-bd88-4691-a16c-24e90a7e5201"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <textField pattern="dd-MM-yyyy">
+                <reportElement style="Detail" x="0" y="0" width="70" height="15" uuid="f4926000-e7a0-4d04-92e2-7ab3f893f7b3"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{SaleDate}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="276" y="0" width="92" height="15" uuid="d7e0b979-c89b-4a8b-9d9a-b89debc24a26"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{MTotal}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="368" y="0" width="92" height="15" uuid="8208c7e1-068f-4abf-96a1-b1fc34d48f28"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{MCash}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="Detail" x="460" y="0" width="95" height="15" uuid="6cd3f459-60e6-4a24-9210-1108cab97301"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{MReturn}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="70" y="0" width="56" height="15" uuid="e921eea8-9c3a-4569-8c6e-0c0737f6b02d"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{SaleID}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="126" y="0" width="169" height="15" uuid="42fe9bdf-c7ca-4f34-84b2-fde9a14ca208"/>
+                <textElement>
+                    <font fontName="Liberation Sans" size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{Cashier}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="46" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="0eeb2daf-f5fe-43b7-9ecc-c879b754c7fa"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="b3ebb1c8-77a2-4728-967b-9b67eb20a224"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Liberation Sans" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="c7e8b7ed-a790-4680-84d9-20b041e427b0"/>
+                <textElement>
+                    <font fontName="Liberation Sans" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="8b657d62-872d-4ddb-9d18-49b9a33ea101"/>
+                <textElement>
+                    <font fontName="Liberation Sans" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Transparent" x="3" y="0" width="552" height="20" forecolor="#666666" uuid="d24dfacb-b8f7-445c-8bee-874a24903328"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Liberation Sans"/>
+                </textElement>
+                <text><![CDATA[Generated By MiniPOS]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>
